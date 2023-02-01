@@ -15,12 +15,15 @@ function Home() {
       .then((res) => res.json())
       .then((data) =>
         data.movies
-          .map((film) => (film.overview = truncate(film.overview, 250)))
-          .map(
-            (film) =>
-              (film.poster_path =
-                "https://image.tmdb.org/t/p/w500" + data.poster_path)
-          )
+          .map((film) => {
+            const overview = truncate(film.overview, 250);
+            return { ...film, overview };
+          })
+          .map((film) => {
+            const poster_path =
+              "https://image.tmdb.org/t/p/w500" + film.poster_path;
+            return { ...film, poster_path };
+          })
       )
       .then((processedData) => setMoviesData(processedData));
   }, []);
