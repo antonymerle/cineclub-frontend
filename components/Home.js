@@ -13,7 +13,7 @@ function Home() {
   useEffect(() => {
     fetch("https://cineclub-antonymerle.vercel.app/movies")
       .then((res) => res.json())
-      .then((data) => setMoviesData(data));
+      .then((data) => setMoviesData(data.movies));
   }, []);
 
   const truncate = (str, max) => {
