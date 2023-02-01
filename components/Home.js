@@ -13,7 +13,16 @@ function Home() {
   useEffect(() => {
     fetch("https://cineclub-antonymerle.vercel.app/movies")
       .then((res) => res.json())
-      .then((data) => setMoviesData(data.movies));
+      .then((data) =>
+        data
+          .map((film) => (film.overview = truncate(film.overview, 250)))
+          .map(
+            (film) =>
+              (film.poster_path =
+                "https://image.tmdb.org/t/p/w500" + data.poster_path)
+          )
+      )
+      .then((processedData) => setMoviesData(processedData));
   }, []);
 
   const truncate = (str, max) => {
@@ -63,8 +72,8 @@ function Home() {
         updateLikedMovies={updateLikedMovies}
         isLiked={isLiked}
         title={data.title}
-        overview={truncate(data.overview, 250)}
-        poster={"https://image.tmdb.org/t/p/w500" + data.poster_path}
+        overview={data.overview}
+        poster={data.poster_path}
         voteAverage={data.voteAverage}
         voteCount={data.voteCount}
       />
