@@ -77,8 +77,8 @@ function Home() {
         title={data.title}
         overview={data.overview}
         poster={data.poster_path}
-        voteAverage={data.voteAverage}
-        voteCount={data.voteCount}
+        voteAverage={data.vote_average}
+        voteCount={data.vote_count}
       />
     );
   });
