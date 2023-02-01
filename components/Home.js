@@ -14,16 +14,14 @@ function Home() {
     fetch("https://cineclub-antonymerle.vercel.app/movies")
       .then((res) => res.json())
       .then((data) =>
-        data.movies
-          .map((film) => {
-            const overview = truncate(film.overview, 250);
-            return { ...film, overview };
-          })
-          .map((film) => {
-            const poster_path =
-              "https://image.tmdb.org/t/p/w500" + film.poster_path;
-            return { ...film, poster_path };
-          })
+        data.movies.map((film) => {
+          const overview = truncate(film.overview, 250);
+          const poster = "https://image.tmdb.org/t/p/w500" + film.poster_path;
+
+          const voteAverage = film.vote_average;
+          const voteCount = film.vote_count;
+          return { ...film, overview, poster, voteAverage, voteCount };
+        })
       )
       .then((processedData) => setMoviesData(processedData));
   }, []);
@@ -76,9 +74,9 @@ function Home() {
         isLiked={isLiked}
         title={data.title}
         overview={data.overview}
-        poster={data.poster_path}
-        voteAverage={data.vote_average}
-        voteCount={data.vote_count}
+        poster={data.poster}
+        voteAverage={data.voteAverage}
+        voteCount={data.voteCount}
       />
     );
   });
