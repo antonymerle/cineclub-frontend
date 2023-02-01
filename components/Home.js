@@ -14,7 +14,7 @@ function Home() {
     fetch("https://cineclub-antonymerle.vercel.app/movies")
       .then((res) => res.json())
       .then((data) =>
-        data
+        data.movies
           .map((film) => (film.overview = truncate(film.overview, 250)))
           .map(
             (film) =>
