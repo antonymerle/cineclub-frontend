@@ -11,7 +11,7 @@ function Home() {
   const [moviesData, setMoviesData] = useState([]);
 
   useEffect(() => {
-    fetch("https://cineclub-jcbzwbtgv-antonymerle.vercel.app/movies")
+    fetch("https://cineclub-antonymerle.vercel.app/movies")
       .then((res) => res.json())
       .then((data) => setMoviesData(data));
   }, []);
